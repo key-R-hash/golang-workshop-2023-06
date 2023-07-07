@@ -19,16 +19,10 @@ func main() {
 	firstName := getUserData("please enter your first name")
 	lastName := getUserData("please enter your last name")
 	birthday := getUserData("please enter your birthday")
-	createAt := time.Now()
 
-	userdata := User{
-		firstName,
-		lastName,
-		birthday,
-		createAt,
-	}
+	userdata := NewUser(firstName, lastName, birthday)
 
-	outputUserData(userdata)
+	userdata.outputUserData()
 }
 
 func getUserData(text string) string {
@@ -40,6 +34,17 @@ func getUserData(text string) string {
 	return cleanedInput
 }
 
-func outputUserData(userdata User) {
+func (userdata User) outputUserData() {
 	fmt.Println(userdata.firstName, userdata.lastName, userdata.birthday, userdata.createAt)
+}
+
+func NewUser(firstName string, lastName string, birthday string) User {
+	createAt := time.Now()
+
+	return User{
+		firstName,
+		lastName,
+		birthday,
+		createAt,
+	}
 }
